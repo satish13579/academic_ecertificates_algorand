@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E Certificate Verification Using Block Chain</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .navbar-custom {
+            background-color: #673AB7;
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: #ffffff;
+            border-radius: 8px;
+            border: 2px solid #673AB7;
+        }
+
+        .navbar-custom .nav-link:hover {
+            border-radius: 8px;
+            border: 2px solid #ffffff;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border-color: #ffffff;
+            color: #ffffff;
+            background: #ffffff;
+        }
+
+        .active {
+            color: #673AB7;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            border-radius: 8px;
+        }
+
+        .dropdown-item {
+            background-color: #ffffff;
+            color: #673AB7;
+        }
+
+        .dropdown-item:hover {
+            background-color: #673AB7;
+            color: #ffffff;
+        }
+
+        .dropdown-menu.show {
+            background-color: #ffffff !important;
+        }
+
+        .outer-border {
+            width: 800px;
+            height: 650px;
+            padding: 20px;
+            text-align: center;
+            border: 10px solid #673AB7;
+            margin: auto;
+        }
+
+        .inner-dotted-border {
+            width: 750px;
+            height: 600px;
+            padding: 20px;
+            text-align: center;
+            border: 5px solid #673AB7;
+            border-style: dotted;
+        }
+
+        .certification {
+            font-size: 50px;
+            font-weight: bold;
+            color: #663ab7;
+        }
+
+        .certify {
+            font-size: 25px;
+        }
+
+        .name {
+            font-size: 30px;
+            color: green;
+        }
+
+        .fs-30 {
+            font-size: 30px;
+        }
+
+        .fs-20 {
+            font-size: 20px;
+        }
+
+        .btn-primary {
+            background-color: #663ab7;
+            border-color: #663ab7;
+        }
+
+        .btn-primary:hover {
+            background-color: rgba(103, 58, 183, 0.8);
+            border-color: #663ab7;
+        }
+
+        .btn-primary:active {
+            background-color: #663ab7;
+            border-color: #663ab7;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-custom sticky-top justify-content-end">
+        <div class="container-fluid overflow-hidden">
+            <a class="navbar-brand  mb-0 h1" href="#">
+                E-Certificate Verification
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="#LoginModal" class="nav-link" data-bs-toggle="modal">University Login <i
+                                class="fa-solid fa-building-columns"></i></a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav><br>
+    <div style="padding-top: 20px;" class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Certificate Verification</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="cert_form">
+                            <div class="form-group row">
+                                <label for="cert_id" class="col-md-4 col-form-label text-md-right">Certificate
+                                    ID</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="cert_id" class="form-control" name="cert_id" required>
+                                </div>
+                            </div>
+
+
+                            <div style="padding-top: 20px;" class="col-md-6 offset-md-4 text-center">
+                                <button id="verify_btn" class="btn btn-primary">
+                                    Verify
+                                </button>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="cert_container" class="container text-center">
+    </div>
+
+    <div id="LoginModal" class="modal fade" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <form id="login_from">
+                    <div class="modal-header">
+                        <h4 class="modal-title">University Login</h4>
+                        <button type="button" class="btn-close reset" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="alert-container"></div>
+                        <div class="form-group">
+                            <label>Mnemonic</label>
+                            <textarea id="mnemonic" name="mnemonic" class="form-control" rows="4" required></textarea>
+                        </div>
+                    </div>
+                    <input type="reset" id="res" style="display:none">
+                    <div class="modal-footer">
+                        <input id="btn-login-sub" type='submit' style="display:none">
+                        <input type="button" class="btn btn-outline-secondary reset" data-bs-dismiss="modal"
+                            value="Cancel">
+                        <button type="button" class="btn btn-primary" id="btn-login">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#verify_btn').on("click", function (e) {
+            e.preventDefault();
+            var form = document.getElementById('cert_form');
+            if (form.checkValidity()) {
+                var id = $('#cert_id').val();
+                $.ajax({
+                    type: "post",
+                    url: "http://127.0.0.1:5000/get_certificate",
+                    data: { "txn_id": id },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        if (data.status == false) {
+                            $('#cert_container').html('');
+                            alert(data.err);
+                        }
+                        else if (data.status == true) {
+                            data = data.data;
+                            rendered_data = render_certificate(data.name, data.rollno, data.branch, data.year, id);
+                            $('#cert_container').html(rendered_data);
+                        }
+                    },
+                    error: function (requestObject, error, errorThrown) {
+                        alert("Unable to Connect To Server.!!\nTurn on The Server");
+                    }
+                });
+            }
+            else {
+                form.reportValidity();
+            }
+        });
+
+        $(document).on('click', '#btn-login', function (e) {
+            var form = document.querySelector("#login_from");
+            console.log(form);
+            if (!form.checkValidity()) {
+                $("#btn-login-sub").click();
+            }
+            else {
+                $.ajax({
+                    data: { 'mnemonic': $('#mnemonic').val() },
+                    type: "post",
+                    url: "http://127.0.0.1:5000/login",
+                    success: function (dataResult) {
+                        var dataResult = JSON.parse(dataResult);
+                        if (dataResult.status == true) {
+                            window.location.href = "http://127.0.0.1:5000/uc";
+                        }
+                        else if (dataResult.status == false) {
+                            var alert = render_danger_alert(dataResult.err);
+                            $('#alert-container').html(alert + $('#alert-container').html());
+                        }
+                    },
+                    error: function (requestObject, error, errorThrown) {
+                        alert("Unable to Connect To Server.!!\nTurn on The Server");
+                    }
+                });
+            }
+        });
+
+        $(document).ready(function (e) {
+            var urll = window.location.href;
+            if (urll.includes('?cert=')) {
+                var arr = urll.split('?cert=');
+                var id = arr[1];
+                $('#cert_id').val(id);
+                $('#verify_btn').click();
+            }
+        });
+
+        function render_certificate(name, rollno, branch, year, cert_id) {
+            return `<div class="outer-border">
+    <div class="inner-dotted-border">
+           <span class="certification">Certificate of Graduation</span>
+           <br><br>
+           <span class="certify"><i>This is to certify that</i></span>
+           <br><br>
+           <span class="name"><b>`+ name + `</b></span><br/><br/>
+           <span class="certify"><i>Bearing <B>`+ rollno + `</B> Regd No. </i></span> <br/><br/>
+           <span class="certify"><i>has successfully completed the Graduation in</i></span> <br/><br/>
+           <span class="fs-30"><b>`+ branch + `</b> Branch</span> <br/><br/>
+           <br><div style="text-align: start !important;"><span class="certify" ><i>Graduation Year : </i></span>
+          <span class="fs-30"><b>`+ year + `</b></span></div>
+          <div style="text-align: start !important;"><span class="certify" ><i>Certificate ID : </i></span>
+            <a href="http://127.0.0.1:5000/?cert=`+ cert_id + `"><b>` + cert_id + `</b></a></div>
+    </div>
+    </div><br><a target='_blank' href='https://testnet.algoexplorer.io/tx/`+ cert_id +`'>Click Here</a> To View The Certificate in AlgoExplorer.<br><br>`
+        }
+
+        function render_danger_alert(message) {
+            return `<div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+                        <i class="fa-solid fa-triangle-exclamation"></i> &nbsp;
+                        <div>
+                          `+ message + `
+                        </div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>`
+        }
+    </script>
+</body>
+
+</html>

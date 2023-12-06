@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Certificate On Blockchain</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .navbar-custom {
+            background-color: #673AB7;
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: #ffffff;
+            border-radius: 8px;
+            border: 2px solid #673AB7;
+        }
+
+        .navbar-custom .nav-link:hover {
+            border-radius: 8px;
+            border: 2px solid #ffffff;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border-color: #ffffff;
+            color: #ffffff;
+            background: #ffffff;
+        }
+
+        .active {
+            color: #673AB7;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            border-radius: 8px;
+        }
+
+        .dropdown-item {
+            background-color: #ffffff;
+            color: #673AB7;
+        }
+
+        .dropdown-item:hover {
+            background-color: #673AB7;
+            color: #ffffff;
+        }
+
+        .dropdown-menu.show {
+            background-color: #ffffff !important;
+        }
+
+        .outer-border {
+            width: 800px;
+            height: 650px;
+            padding: 20px;
+            text-align: center;
+            border: 10px solid #673AB7;
+            margin: auto;
+        }
+
+        .inner-dotted-border {
+            width: 750px;
+            height: 600px;
+            padding: 20px;
+            text-align: center;
+            border: 5px solid #673AB7;
+            border-style: dotted;
+        }
+
+        .certification {
+            font-size: 50px;
+            font-weight: bold;
+            color: #663ab7;
+        }
+
+        .certify {
+            font-size: 25px;
+        }
+
+        .name {
+            font-size: 30px;
+            color: green;
+        }
+
+        .fs-30 {
+            font-size: 30px;
+        }
+
+        .fs-20 {
+            font-size: 20px;
+        }
+
+        .btn-primary {
+            background-color: #663ab7;
+            border-color: #663ab7;
+        }
+
+        .btn-primary:hover {
+            background-color: rgba(103, 58, 183, 0.8);
+            border-color: #663ab7;
+        }
+
+        .btn-primary:active {
+            background-color: #663ab7;
+            border-color: #663ab7;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-custom sticky-top justify-content-end">
+        <div class="container-fluid overflow-hidden">
+            <a class="navbar-brand  mb-0 h1" href="#">
+                E-Certificate Verification
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="#" id="logout-btn" class="nav-link">University Logout <i
+                                class="fa-solid fa-building-columns"></i></a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav><br>
+    <div style="padding-top: 20px;" class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Upload Certificate</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="upload_form">
+                            <div class="form-group row">
+                                <label for="rollno" class="col-md-4 col-form-label text-md-right">Roll No.</label>
+                                <div class="col-md-6">
+                                    <input type="hidden" name="type" value="certificate">
+                                    <input type="text" id="rollno" class="form-control" name="rollno" required>
+                                </div>
+                            </div>
+                            <div style="padding-top:12px;" class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Name.</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="name" class="form-control" name="name" required>
+                                </div>
+                            </div>
+                            <div style="padding-top:12px;" class="form-group row">
+                                <label for="branch" class="col-md-4 col-form-label text-md-right">Branch.</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="branch" class="form-control" name="branch" required>
+                                </div>
+                            </div>
+                            <div style="padding-top:12px;" class="form-group row">
+                                <label for="year" class="col-md-4 col-form-label text-md-right">Granduation
+                                    Year.</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="year" class="form-control" name="year" required>
+                                </div>
+                            </div>
+
+                            <div style="padding-top: 20px;" class="col-md-6 offset-md-4 text-center">
+                                <button id="upload_btn" class="btn btn-primary">
+                                    Upload Certificate &nbsp; <span id="loading_icon"></span>
+                                </button>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 24px;" id="alerts" class="container"></div>
+    <script>
+        $('#upload_btn').on('click', function (e) {
+            e.preventDefault();
+            var form = document.getElementById('upload_form');
+            if (form.checkValidity()) {
+                $('#upload_btn').prop('disabled', true);
+                $('#loading_icon').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>');
+                var rollno = $('#rollno').val();
+                var name = $('#name').val();
+                var branch = $('#branch').val();
+                var year = $('#year').val();
+                var data = {"data":JSON.stringify({ 'type': 'certificate', 'rollno': rollno, 'name': name, 'branch': branch, 'year': year })}
+                $.ajax({
+                    type: "post",
+                    url: 'http://127.0.0.1:5000/upload_certificate',
+                    data: data,
+                    success: function (dataResult) {
+                        var dataR = JSON.parse(dataResult);
+                        if (dataR.status == true) {
+                            var resp = dataR.resp;
+                            var cert_id = resp.txn_id;
+                            var block = resp.block;
+                            var msg = "Certificate was Uploaded to Blockchain with Certificate ID : " + cert_id + "<br>It was Confirmed In Block  : " + block + "<br><a target='_blank' href='https://testnet.algoexplorer.io/tx/" + cert_id + "'>Click Here</a> To View The Certificate in AlgoExplorer.";
+                            $('#alerts').html(render_success_alert(msg) + $('#alerts').html());
+                            $('#upload_btn').prop('disabled', false);
+                            $('#loading_icon').html('');
+                        }
+                        else if (dataR.status == false) {
+                            var err = dataR.err;
+                            if (err == "Please Login To Upload Certificate") {
+                                alert("Session Expired.!!\nPlease Login Again To Continue");
+                                window.location.href = "http://127.0.0.1:5000/";
+                            }
+                            else {
+                                $('#alerts').html(render_danger_alert(err) + $('#alerts').html());
+                                $('#upload_btn').prop('disabled', false);
+                                $('#loading_icon').html('');
+                            }
+                        }
+                    },
+                    error: function (requestObject, error, errorThrown) {
+                        $('#upload_btn').prop('disabled', false);
+                            $('#loading_icon').html('');
+                        alert("Unable to Connect To Server.!!\nTurn on The Server");
+                    }
+                });
+            }
+            else {
+                form.reportValidity();
+            }
+        });
+
+        $(document).ready(function (e) {
+            $.ajax({
+                type: "get",
+                url: "http://127.0.0.1:5000/auth",
+                success: function (data) {
+                    var data = JSON.parse(data);
+                    console.log(data);
+                    if (data.status == false) {
+                        alert('Invalid Session\nPlease Login To Continue');
+                        window.location.href = "http://127.0.0.1:5000/";
+                    }
+                },
+                error: function (requestObject, error, errorThrown) {
+                    alert("Unable to Connect To Server.!!\nTurn on The Server");
+                }
+            });
+        });
+
+        $('#logout-btn').on('click',function(e){
+            $.ajax({
+                type:"get",
+                url:"http://127.0.0.1:5000/logout",
+                success: function(data){
+                    var data = JSON.parse(data);
+                    if(data.status==true){
+                        window.location.href="http://127.0.0.1:5000/";
+                    }
+                    else{
+                        window.location.href="http://127.0.0.1:5000/";
+                    }
+                }
+            });
+        });
+
+        function render_danger_alert(message) {
+            return `<div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+                        <i class="fa-solid fa-triangle-exclamation"></i> &nbsp;
+                        <div>
+                          `+ message + `
+                        </div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>`
+        }
+
+        function render_success_alert(message) {
+            return `<div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
+                <i class="fa-solid fa-circle-check fa-2xl"></i> &nbsp;&nbsp;&nbsp;
+                        <div>
+                          `+ message + `
+                        </div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>`
+        }
+    </script>
+</body>
+
+</html>
